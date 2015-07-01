@@ -1,0 +1,10 @@
+D:\Programming\Random-Projects\BluetoothMouseController\BluetoothMouseController\bin\Debug\BluetoothMouseController.exe
+D:\Programming\Random-Projects\BluetoothMouseController\BluetoothMouseController\bin\Debug\BluetoothMouseController.pdb
+D:\Programming\Random-Projects\BluetoothMouseController\BluetoothMouseController\bin\Debug\InTheHand.Net.Personal.dll
+D:\Programming\Random-Projects\BluetoothMouseController\BluetoothMouseController\bin\Debug\InTheHand.Net.Personal.xml
+D:\Programming\Random-Projects\BluetoothMouseController\BluetoothMouseController\obj\x86\Debug\BluetoothMouseController.csprojResolveAssemblyReference.cache
+D:\Programming\Random-Projects\BluetoothMouseController\BluetoothMouseController\obj\x86\Debug\BluetoothMouseController.Form1.resources
+D:\Programming\Random-Projects\BluetoothMouseController\BluetoothMouseController\obj\x86\Debug\BluetoothMouseController.Properties.Resources.resources
+D:\Programming\Random-Projects\BluetoothMouseController\BluetoothMouseController\obj\x86\Debug\BluetoothMouseController.csproj.GenerateResource.Cache
+D:\Programming\Random-Projects\BluetoothMouseController\BluetoothMouseController\obj\x86\Debug\BluetoothMouseController.exe
+D:\Programming\Random-Projects\BluetoothMouseController\BluetoothMouseController\obj\x86\Debug\BluetoothMouseController.pdb

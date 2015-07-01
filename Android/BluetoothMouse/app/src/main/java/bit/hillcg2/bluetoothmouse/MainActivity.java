@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Set;
 import java.util.UUID;
 import android.view.View.OnDragListener;
@@ -34,7 +35,8 @@ public class MainActivity extends ActionBarActivity {
     private float oldX;
     private float oldY;
 
-    private Button btnClick;
+    private Button btnleftClick;
+    private Button btnRightClick;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +50,12 @@ public class MainActivity extends ActionBarActivity {
         mainLayout = (RelativeLayout)findViewById(R.id.mainLayout);
         mainLayout.setOnTouchListener(new touchHandle());
 
-        btnClick = (Button)findViewById(R.id.btnClick);
-        btnClick.setOnClickListener(new makeMouseClick());
+        btnleftClick = (Button)findViewById(R.id.btnLeftClick);
+        btnleftClick.setOnClickListener(new doLeftClick());
+
+        btnRightClick = (Button)findViewById(R.id.btnRightClick);
+        btnRightClick.setOnClickListener(new doRightClick());
+
         BTAdapter = BluetoothAdapter.getDefaultAdapter();
 
         if (BTAdapter == null) {
@@ -85,15 +91,25 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
-    public class makeMouseClick implements View.OnClickListener{
+    public class doLeftClick implements View.OnClickListener{
 
         @Override
         public void onClick(View v) {
-            connectionThread.write("click");
+            connectionThread.write("Lclick");
+        }
+    }
+
+    public class doRightClick implements View.OnClickListener{
+
+        @Override
+        public void onClick(View view) {
+            connectionThread.write("Rclick");
         }
     }
 
     public class touchHandle implements View.OnTouchListener{
+        private static final int MAX_CLICK_DURATION = 200;
+        private long startClickTime;
 
         @Override
         public boolean onTouch(View v, MotionEvent event) {
@@ -104,6 +120,15 @@ public class MainActivity extends ActionBarActivity {
                 case MotionEvent.ACTION_DOWN:
                     oldX = event.getX();
                     oldY = event.getY();
+
+                    startClickTime = Calendar.getInstance().getTimeInMillis();
+                    break;
+                case MotionEvent.ACTION_UP:
+                    long clickDuration = Calendar.getInstance().getTimeInMillis() - startClickTime;
+
+                    if(clickDuration < MAX_CLICK_DURATION)
+                        connectionThread.write("Lclick");
+
                     break;
                 case MotionEvent.ACTION_MOVE:
                     float differenceX = oldX - event.getX();
@@ -120,19 +145,6 @@ public class MainActivity extends ActionBarActivity {
                     connectionThread.write(differenceString);
                     break;
             }
-            return true;
-        }
-    }
-
-    public class handleDragging implements OnDragListener{
-
-        @Override
-        public boolean onDrag(View v, DragEvent event) {
-            float newX = event.getX();
-            float newY = event.getY();
-
-
-
             return true;
         }
     }
