@@ -6,7 +6,6 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Set;
 import java.util.UUID;
-import android.view.View.OnDragListener;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -195,9 +193,12 @@ public class MainActivity extends ActionBarActivity {
 
         /* Call this from the main activity to shutdown the connection */
         public void cancel() {
-            try {
+            try
+            {
                 mmSocket.close();
-            } catch (IOException e) {
+            }
+            catch (IOException e)
+            {
             }
         }
     }

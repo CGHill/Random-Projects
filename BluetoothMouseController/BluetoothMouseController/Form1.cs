@@ -31,7 +31,7 @@ namespace BluetoothMouseController
 
         Thread bluetoothServerThread;
 
-        bool changeInMouse;
+        //bool changeInMouse;
         bool connected;
         bool connecting;
 
@@ -48,7 +48,7 @@ namespace BluetoothMouseController
         {
             connecting = false;
             connected = false;
-            changeInMouse = false;
+            //changeInMouse = false;
             this.Cursor = new Cursor(Cursor.Current.Handle);
             mouseX = Cursor.Position.X;
             mouseY = Cursor.Position.Y;
@@ -56,23 +56,26 @@ namespace BluetoothMouseController
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            timer1.Enabled = true;
+            updateUI("Timer start broadcast");
+            connecting = true;
+            connectAsServer();
+            //timer1.Enabled = true;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (!connecting && !connected)
+            /*if (!connecting && !connected)
             {
                 updateUI("Timer start broadcast");
                 connecting = true;
                 connectAsServer();
-            }
-            if (changeInMouse)
+            }*/
+            /*if (changeInMouse)
             {
                 this.Cursor = new Cursor(Cursor.Current.Handle);
                 Cursor.Position = new Point(mouseX, mouseY);
                 changeInMouse = false;
-            }
+            }*/
         }
 
         public void doMouseClick()
@@ -150,9 +153,13 @@ namespace BluetoothMouseController
                     string[] splitResults = input.Split(',');
                     int xDiff = Convert.ToInt32(splitResults[0]);
                     int yDiff = Convert.ToInt32(splitResults[1]);
-                    changeInMouse = true;
                     mouseX -= xDiff;
                     mouseY -= yDiff;
+
+                    changeMouse(xDiff, yDiff);
+                   
+                    //changeInMouse = true;
+                    
                 }
                 catch (Exception e)
                 {
@@ -173,6 +180,17 @@ namespace BluetoothMouseController
             bluetoothListener = null;
 
             bluetoothServerThread.Abort();
+        }
+
+        private void changeMouse(int x, int y)
+        {
+            Func<int> del = delegate()
+            {
+                this.Cursor = new Cursor(Cursor.Current.Handle);
+                Cursor.Position = new Point(mouseX, mouseY);
+                return 0;
+            };
+            Invoke(del);
         }
 
         private void updateUI(string message)
