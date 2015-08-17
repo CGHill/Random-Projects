@@ -11,4 +11,8 @@
     <string name="value_class">Class:</string>
     <string name="btn_take_picture">Take Picture</string>
     <string name="save_data">Save</string>
+    <string name="btn_delete">Delete</string>
+    <string name="btn_view">View</string>
+    <string name="title_activity_view_entry">ViewEntry</string>
+    <string name="btn_rotate">Rotate Image</string>
 </resources>

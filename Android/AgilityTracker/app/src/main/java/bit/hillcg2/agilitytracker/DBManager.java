@@ -55,6 +55,9 @@ public class DBManager {
         //Loop over all of the records
         for(int i=0; i < recordCount; i++)
         {
+            int idIndex = recordSet.getColumnIndex("ID");
+            int id = recordSet.getInt(idIndex);
+
             int dateIndex = recordSet.getColumnIndex("date");
             String date = recordSet.getString(dateIndex);
 
@@ -64,7 +67,7 @@ public class DBManager {
             int dogClassIndex = recordSet.getColumnIndex("dogClass");
             String currDogClass = recordSet.getString(dogClassIndex);
 
-            AgilityEntry newEntry = new AgilityEntry(date, filePath, currDogClass);
+            AgilityEntry newEntry = new AgilityEntry(id, date, filePath, currDogClass);
 
             allEntires.add(newEntry);
 
@@ -72,6 +75,17 @@ public class DBManager {
             recordSet.moveToNext();
         }
 
+        AgilityDB.close();
+
         return allEntires;
+    }
+
+    public void deleteEntry(int id){
+        String deleteQuery = "DELETE FROM tblAgilityTracker WHERE ID=" + id;
+
+        AgilityDB = context.openOrCreateDatabase("agilityDB", context.MODE_PRIVATE, null);
+        AgilityDB.execSQL(deleteQuery);
+        AgilityDB.close();
+
     }
 }

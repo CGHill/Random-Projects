@@ -8,8 +8,11 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -28,12 +31,13 @@ public class EnterData extends AppCompatActivity {
     Button btnTakePicture;
     Button btnSave;
     DBManager dbManager;
-
     Spinner spinClass;
     String[] classes;
     ArrayAdapter classesAdapter;
-
     EditText dateBox;
+
+    Boolean pictureTaken;
+    Boolean dateEntered;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,9 @@ public class EnterData extends AppCompatActivity {
         setContentView(R.layout.activity_enter_data);
 
         dbManager = new DBManager(this);
+
+        pictureTaken = false;
+        dateEntered = false;
 
         usersPictureBox = (ImageView)findViewById(R.id.usersPictureBox);
         btnTakePicture = (Button)findViewById(R.id.btnTakePicture);
@@ -56,6 +63,26 @@ public class EnterData extends AppCompatActivity {
         spinClass.setAdapter(classesAdapter);
 
         dateBox = (EditText)findViewById(R.id.dateBox);
+        dateBox.setMaxWidth(dateBox.getWidth());
+        dateBox.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                dateEntered = true;
+
+                if(dateEntered && pictureTaken)
+                    btnSave.setEnabled(true);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     //Creates a file with a unique file name
@@ -96,6 +123,13 @@ public class EnterData extends AppCompatActivity {
             String pictureFilePath = photoFile.getAbsolutePath();
 
             dbManager.insertEntry(enteredDate, pictureFilePath, dogClass);
+
+            dateBox.setText("");
+            spinClass.setSelection(0);
+            usersPictureBox.setImageDrawable(null);
+            btnSave.setEnabled(false);
+
+            Toast.makeText(getBaseContext(), "Entry Saved", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -138,7 +172,10 @@ public class EnterData extends AppCompatActivity {
 
                 usersPictureBox.setImageBitmap(userPhotoBitmap);
 
-                btnSave.setEnabled(true);
+                pictureTaken = true;
+
+                if(dateEntered && pictureTaken)
+                    btnSave.setEnabled(true);
             }
             else
             {
