@@ -25,15 +25,15 @@ namespace BluetoothMouseController
         private const int MOUSEEVENTF_LEFTUP = 0x04;
         private const int MOUSEEVENTF_RIGHTDOWN = 0x08;
         private const int MOUSEEVENTF_RIGHTUP = 0x10;
+        private const int MOUSEEVENTF_WHEEL = 0x800;
 
         BluetoothListener bluetoothListener;
         BluetoothClient conn;
+        Stream mStream;
 
         Thread bluetoothServerThread;
 
-        //bool changeInMouse;
         bool connected;
-        bool connecting;
 
         int mouseX;
         int mouseY;
@@ -46,9 +46,7 @@ namespace BluetoothMouseController
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            connecting = false;
             connected = false;
-            //changeInMouse = false;
             this.Cursor = new Cursor(Cursor.Current.Handle);
             mouseX = Cursor.Position.X;
             mouseY = Cursor.Position.Y;
@@ -57,25 +55,7 @@ namespace BluetoothMouseController
         private void btnStart_Click(object sender, EventArgs e)
         {
             updateUI("Timer start broadcast");
-            connecting = true;
             connectAsServer();
-            //timer1.Enabled = true;
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            /*if (!connecting && !connected)
-            {
-                updateUI("Timer start broadcast");
-                connecting = true;
-                connectAsServer();
-            }*/
-            /*if (changeInMouse)
-            {
-                this.Cursor = new Cursor(Cursor.Current.Handle);
-                Cursor.Position = new Point(mouseX, mouseY);
-                changeInMouse = false;
-            }*/
         }
 
         public void doMouseClick()
@@ -95,7 +75,6 @@ namespace BluetoothMouseController
             catch (ThreadStartException e)
             {
                 updateUI("Thread failed to start");
-                connecting = false;
             }
         }
 
@@ -110,9 +89,9 @@ namespace BluetoothMouseController
 
             updateUI("Client has connected");
             connected = true;
-            connecting = false;
 
-            Stream mStream = conn.GetStream();
+            //Stream mStream = conn.GetStream();
+            mStream = conn.GetStream();
 
             while (connected)
             {
@@ -129,7 +108,6 @@ namespace BluetoothMouseController
                 catch (IOException e)
                 {
                     connected = false;
-                    connecting = false;
                     updateUI("Client disconnected");
                     disconnectBluetooth();
                 }
@@ -138,7 +116,16 @@ namespace BluetoothMouseController
 
         private void handleBluetoothInput(string input)
         {
-            if (input.Contains("Lclick"))
+            //updateUI(input);
+            if(input.Contains("scrollUp"))
+            {
+                mouse_event(MOUSEEVENTF_WHEEL, 0, 0, 10, 0);
+            }
+            else if(input.Contains("scrollDown"))
+            {
+                mouse_event(MOUSEEVENTF_WHEEL, 0, 0, -10, 0);
+            }
+            else if (input.Contains("Lclick"))
             {
                 mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, mouseX, mouseY, 0, 0);
             }
@@ -156,23 +143,20 @@ namespace BluetoothMouseController
                     mouseX -= xDiff;
                     mouseY -= yDiff;
 
-                    changeMouse(xDiff, yDiff);
-                   
-                    //changeInMouse = true;
-                    
+                    changeMouse(xDiff, yDiff);                    
                 }
                 catch (Exception e)
                 {
-                    connected = false;
-                    connecting = false;
-                    updateUI("Client disconnected");
-                    disconnectBluetooth();
+                    
                 }
             }
         }
 
         private void disconnectBluetooth()
         {
+            connected = false;
+            updateUI("Client disconnected");
+
             conn.Close();
             conn = null;
 
@@ -198,6 +182,8 @@ namespace BluetoothMouseController
             Func<int> del = delegate()
             {
                 listOutput.Items.Add(message);
+                listOutput.SelectedIndex = listOutput.Items.Count - 1;
+                listOutput.SelectedIndex = -1;
                 return 0;
             };
             Invoke(del);

@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/dateBox"
             android:layout_weight="0.63"
+            android:singleLine="true"
             android:imeOptions="actionDone"/>
 
         <TextView
@@ -44,17 +45,17 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btn_take_picture"
-        android:id="@+id/btnTakePicture"
+        android:text="@string/btn_course_picture"
+        android:id="@+id/btnCoursePicture"
         android:layout_below="@+id/linearLayout"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/usersPictureBox"
-        android:layout_below="@+id/btnTakePicture"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/mainPictureBox"
+        android:layout_below="@+id/btnCoursePicture"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -67,4 +68,23 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_results_picture"
+        android:id="@+id/btnResultsPicture"
+        android:layout_alignTop="@+id/btnCoursePicture"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:id="@+id/smallPictureBox"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/btnSave"
+        android:layout_toStartOf="@+id/btnSave" />
 </RelativeLayout>

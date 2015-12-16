@@ -1,21 +1,27 @@
 package bit.hillcg2.agilitytracker;
 
-
+//Model class
 public class AgilityEntry {
     private int ID;
     private String date;
-    private String filePath;
+    private String courseFilePath;
+    private String resultFilePath;
     private String dogClass;
 
-    public AgilityEntry(int startID, String startDate, String startFilePath, String startDogClass){
+    public AgilityEntry(int startID, String startDate, String startCourseFilePath, String startResultsFilePath, String startDogClass){
         ID = startID;
         date = startDate;
-        filePath = startFilePath;
+        courseFilePath = startCourseFilePath;
+        resultFilePath = startResultsFilePath;
         dogClass = startDogClass;
     }
 
-    public String getFilePath(){
-        return filePath;
+    public String getCourseFilePath(){
+        return courseFilePath;
+    }
+
+    public String getResultFilePathFilePath(){
+        return resultFilePath;
     }
 
     public int getID(){

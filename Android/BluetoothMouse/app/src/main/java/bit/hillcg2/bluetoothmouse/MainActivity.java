@@ -6,6 +6,7 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -41,19 +42,6 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        init();
-    }
-
-    public void init() {
-        mainLayout = (RelativeLayout)findViewById(R.id.mainLayout);
-        mainLayout.setOnTouchListener(new touchHandle());
-
-        btnleftClick = (Button)findViewById(R.id.btnLeftClick);
-        btnleftClick.setOnClickListener(new doLeftClick());
-
-        btnRightClick = (Button)findViewById(R.id.btnRightClick);
-        btnRightClick.setOnClickListener(new doRightClick());
-
         BTAdapter = BluetoothAdapter.getDefaultAdapter();
 
         if (BTAdapter == null) {
@@ -65,6 +53,21 @@ public class MainActivity extends ActionBarActivity {
             Intent enableBT = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBT, REQUEST_ENABLE_BT);
         }
+        else
+        {
+            init();
+        }
+    }
+
+    public void init() {
+        mainLayout = (RelativeLayout)findViewById(R.id.mainLayout);
+        mainLayout.setOnTouchListener(new touchHandle());
+
+        btnleftClick = (Button)findViewById(R.id.btnLeftClick);
+        btnleftClick.setOnClickListener(new doLeftClick());
+
+        btnRightClick = (Button)findViewById(R.id.btnRightClick);
+        btnRightClick.setOnClickListener(new doRightClick());
 
         deviceList = new ArrayList<BluetoothDevice>();
 
@@ -105,13 +108,60 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    final GestureDetector gestureDetector = new GestureDetector(getBaseContext(), new GestureDetector.SimpleOnGestureListener(){
+        @Override
+        public boolean onSingleTapUp(MotionEvent e) {
+            connectionThread.write("Lclick");
+
+            return super.onSingleTapUp(e);
+        }
+
+        @Override
+        public boolean onDown(MotionEvent e) {
+            return true;
+        }
+
+        @Override
+        public void onLongPress(MotionEvent e) {
+            connectionThread.write("Rclick");
+            super.onLongPress(e);
+        }
+
+        @Override
+        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+            if(e2.getPointerCount() == 2)
+            {
+                if (distanceY > 0) {
+                    connectionThread.write("scrollUp");
+                }
+                if (distanceY < 0) {
+                    connectionThread.write("scrollDown");
+                }
+            }
+            else
+            {
+                int roundedX = Math.round(distanceX);
+                int roundedY = Math.round(distanceY);
+
+                String differenceString = String.valueOf(roundedX) + "," + String.valueOf(roundedY) + ", junk";
+                connectionThread.write(differenceString);
+            }
+
+            return super.onScroll(e1, e2, distanceX, distanceY);
+        }
+    });
+
     public class touchHandle implements View.OnTouchListener{
         private static final int MAX_CLICK_DURATION = 200;
         private long startClickTime;
 
         @Override
         public boolean onTouch(View v, MotionEvent event) {
-            int action = event.getAction();
+            return gestureDetector.onTouchEvent(event);
+
+            /*int action = event.getAction();
+
+            int numFingers = event.getPointerCount();
 
             switch(action)
             {
@@ -135,15 +185,31 @@ public class MainActivity extends ActionBarActivity {
                     int roundedX = Math.round(differenceX);
                     int roundedY = Math.round(differenceY);
 
-                    String differenceString = String.valueOf(roundedX) + "," + String.valueOf(roundedY) + ", junk";
+                    if(numFingers == 2)
+                    {
+                        //Scroll down
+                        if(oldY < event.getY())
+                        {
+                            connectionThread.write("scrollDown");
+                        }
+                        //scroll up
+                        if(oldY > event.getY())
+                        {
+                            connectionThread.write("scrollUp");
+                        }
+                    }
+                    else
+                    {
+                        String differenceString = String.valueOf(roundedX) + "," + String.valueOf(roundedY) + ", junk";
 
-                    oldX = event.getX();
-                    oldY = event.getY();
+                        oldX = event.getX();
+                        oldY = event.getY();
 
-                    connectionThread.write(differenceString);
+                        connectionThread.write(differenceString);
+                    }
                     break;
             }
-            return true;
+            return true;*/
         }
     }
 
@@ -258,6 +324,10 @@ public class MainActivity extends ActionBarActivity {
             if (resultCode != RESULT_OK) {
                 Toast.makeText(this, "App needs bluetooth", Toast.LENGTH_LONG).show();
                 finish();
+            }
+            else if(resultCode == RESULT_OK)
+            {
+                init();
             }
         }
     }

@@ -28,10 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.listOutput = new System.Windows.Forms.ListBox();
             this.btnStart = new System.Windows.Forms.Button();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // listOutput
@@ -52,11 +50,6 @@
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
-            // timer1
-            // 
-            this.timer1.Interval = 5;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -75,7 +68,6 @@
 
         private System.Windows.Forms.ListBox listOutput;
         private System.Windows.Forms.Button btnStart;
-        private System.Windows.Forms.Timer timer1;
     }
 }
 

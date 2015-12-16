@@ -1,18 +1,21 @@
 <resources>
     <string name="app_name">AgilityTracker</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="btn_enterdata">Enter Data</string>
-    <string name="btn_viewdata">View Data</string>
-    <string name="title_activity_view_data">ViewData</string>
-    <string name="title_activity_enter_data">EnterData</string>
+    <string name="btn_enterdata">New Entry</string>
+    <string name="btn_viewdata">View Entries</string>
+    <string name="title_activity_view_data">View Entries</string>
+    <string name="title_activity_enter_data">New Entry</string>
     <string name="date">Date:</string>
     <string name="value_class">Class:</string>
-    <string name="btn_take_picture">Take Picture</string>
+    <string name="btn_course_picture">Course Picture</string>
     <string name="save_data">Save</string>
     <string name="btn_delete">Delete</string>
     <string name="btn_view">View</string>
-    <string name="title_activity_view_entry">ViewEntry</string>
+    <string name="title_activity_view_entry">View Entry</string>
     <string name="btn_rotate">Rotate Image</string>
+    <string name="btn_back">Back</string>
+    <string name="btn_results_picture">Results Picture</string>
+    <string name="course_picture">Course:</string>
+    <string name="results_picture">Results:</string>
 </resources>

@@ -1,0 +1,7 @@
+D:\Programming\Random-Projects\ReformatDates\ReformatDates\bin\Debug\ReformatDates.exe
+D:\Programming\Random-Projects\ReformatDates\ReformatDates\bin\Debug\ReformatDates.pdb
+D:\Programming\Random-Projects\ReformatDates\ReformatDates\obj\x86\Debug\ReformatDates.Form1.resources
+D:\Programming\Random-Projects\ReformatDates\ReformatDates\obj\x86\Debug\ReformatDates.Properties.Resources.resources
+D:\Programming\Random-Projects\ReformatDates\ReformatDates\obj\x86\Debug\ReformatDates.csproj.GenerateResource.Cache
+D:\Programming\Random-Projects\ReformatDates\ReformatDates\obj\x86\Debug\ReformatDates.exe
+D:\Programming\Random-Projects\ReformatDates\ReformatDates\obj\x86\Debug\ReformatDates.pdb

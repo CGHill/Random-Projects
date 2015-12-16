@@ -1,38 +1,89 @@
 package bit.hillcg2.agilitytracker;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.view.View.OnClickListener;
+
+import uk.co.senab.photoview.PhotoViewAttacher;
 
 
-public class ViewEntry extends ActionBarActivity {
+public class ViewEntry extends AppCompatActivity {
+
+    //Globals
+    private DBManager dbManager;
+    private AgilityEntry selectedEntry;
+    private Button btnBack;
+    private ImageView coursePicture;
+    private ImageView resultsPicture;
+    private PictureLoader pictureLoader;
+    private PhotoViewAttacher pic1Attacther;
+    private PhotoViewAttacher pic2Attacther;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_entry);
+
+        //Get everything set up
+        init();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_view_entry, menu);
-        return true;
-    }
+    //Method to set everything up
+    public void init(){
+        btnBack = (Button)findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new backHandler());
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        //Check to see if any values were passed through
+        Bundle extras = getIntent().getExtras();
+        if (extras != null)
+        {
+            //Get the ID of entry selected in last screen
+            int selectedID = extras.getInt("selectedID");
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            //Set up DB and image loader
+            dbManager = new DBManager(getBaseContext());
+            pictureLoader = new PictureLoader();
+
+            //Get an instance of the selected entry
+            selectedEntry = dbManager.getEntry(selectedID);
+
+            //Make sure there is an entry
+            if(selectedEntry != null)
+            {
+                //Get reference to imageviews
+                coursePicture = (ImageView)findViewById(R.id.coursePicture);
+                resultsPicture = (ImageView)findViewById(R.id.resultsPicture);
+
+                //Load in pictures and put them into imageviews
+                String courseFilePath = selectedEntry.getCourseFilePath();
+                Bitmap coursePictureBitmap = pictureLoader.getBitmap(courseFilePath);
+                coursePicture.setImageBitmap(coursePictureBitmap);
+
+                String resultsFilePath = selectedEntry.getResultFilePathFilePath();
+                Bitmap resultsPictureBitmap = pictureLoader.getBitmap(resultsFilePath);
+                resultsPicture.setImageBitmap(resultsPictureBitmap);
+
+                pic1Attacther = new PhotoViewAttacher(coursePicture);
+                pic2Attacther = new PhotoViewAttacher(resultsPicture);
+
+                pic1Attacther.update();
+                pic2Attacther.update();
+            }
         }
+    }
 
-        return super.onOptionsItemSelected(item);
+    //Handler for button that sends user back to previous screen
+    public class backHandler implements OnClickListener{
+        @Override
+        public void onClick(View v) {
+            Intent i = new Intent(getBaseContext(), ViewData.class);
+            startActivity(i);
+            finish();
+        }
     }
 }
