@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="bit.hillcg2.agilitytracker" >
+    package="bit.hillcg2.agilitytracker">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -8,10 +8,10 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,17 +20,17 @@
         </activity>
         <activity
             android:name=".ViewData"
-            android:label="@string/title_activity_view_data" >
-        </activity>
+            android:label="@string/title_activity_view_data" />
         <activity
             android:name=".EnterData"
             android:label="@string/title_activity_enter_data"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ViewEntry"
-            android:label="@string/title_activity_view_entry" >
-        </activity>
+            android:label="@string/title_activity_view_entry" />
+        <activity
+            android:name=".ViewPicture"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
     </application>
 
 </manifest>

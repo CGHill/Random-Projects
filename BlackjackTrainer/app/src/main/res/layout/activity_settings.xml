@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_settings"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="bit.hillcg2.blackjacktrainer.SettingsActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <TextView
+                android:text="Blackjack Payouts:"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/textView"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:text="Highest bet total:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/textView3"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textSize="14sp"
+                    android:layout_weight="1" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:layout_below="@+id/textView"
+                    android:layout_toRightOf="@+id/textView3"
+                    android:layout_toEndOf="@+id/textView3"
+                    android:id="@+id/boxBlackjackHighest"
+                    android:textSize="12sp"
+                    android:layout_weight="1"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <TextView
+                android:text="Chips Active:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView4"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="20dp"
+                android:textAppearance="@style/TextAppearance.AppCompat" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView4"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
+
+                <CheckBox
+                    android:text="Pinks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/checkBJPinksActive"
+                    android:layout_weight="1" />
+
+                <CheckBox
+                    android:text="Blacks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/checkBJBlacksActive"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1" />
+
+                <CheckBox
+                    android:text="Greens"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/checkBJGreensActive"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1" />
+
+                <CheckBox
+                    android:text="Reds"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/checkBJRedsActive"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <TextView
+                android:text="Pairs Payouts:"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView9"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:fontFamily="sans-serif"
+                android:layout_marginTop="50dp"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Highest bet total:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView19"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:id="@+id/boxPairsHighest"
+                    android:layout_weight="1"
+                    android:textSize="12sp"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <TextView
+                android:text="Chips Active:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView20"
+                android:textAppearance="@style/TextAppearance.AppCompat" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <CheckBox
+                    android:text="Greens"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/checkPPGreensActive" />
+
+                <CheckBox
+                    android:text="Reds"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/checkPPRedsActive" />
+
+                <CheckBox
+                    android:text="Yellows"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/checkPPYellowsActive" />
+
+                <CheckBox
+                    android:text="Blues"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/checkPPBluesActive"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_marginTop="40dp"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:text="Save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnSave"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:text="Cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnCancel"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

@@ -18,4 +18,5 @@
     <string name="btn_results_picture">Results Picture</string>
     <string name="course_picture">Course:</string>
     <string name="results_picture">Results:</string>
+    <string name="title_activity_view_picture">ViewPicture</string>
 </resources>

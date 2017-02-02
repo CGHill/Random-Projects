@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">BlackjackTrainer</string>
+    <string name="title_activity_payouts">PayoutsActivity</string>
+    <string name="app_instructions">The chips used for the blackjack and perfect pairs payouts can be changed at any point in the
+        settings menu as well as the highest value that wil be randomly generated. \nPerfect pairs has a maximum of $50 since that's the max for the tables. Values default to $200 for blackjack and $50 for pairs
+    if fields are left empty.</string>
+    <string name="app_instructions_2">After selecting the payout types a question will be randomly create in which you need to work out the payouts for. Enter the number in and hit the done button on the keypad to check the answer. If answered correctly or number of attempts have run out, hit the done button again on the keypad to generate a new question. You will be given 3 attempts to correctly answer the question.</string>
+    <string name="payouts_instructions_title">Payout Odds:</string>
+    <string name="blackjack_payouts_instructions">Blackjack: 3:2 (1.5x the original bet)</string>
+    <string name="mixed_pair_payout">Mixed Pair: 5x the original bet</string>
+    <string name="coloured_pair_payout">Coloured Pair: 10x the original bet</string>
+    <string name="perfect_pair_payout">Perfect Pair: 30x the original bet</string>
+    <string name="pairs_instructions">For perfect pairs payouts, the type of pair to work out for the bet will be given on the left side of the chips.</string>
+</resources>

@@ -63,16 +63,18 @@ public class ViewEntry extends AppCompatActivity {
                 String courseFilePath = selectedEntry.getCourseFilePath();
                 Bitmap coursePictureBitmap = pictureLoader.getBitmap(courseFilePath);
                 coursePicture.setImageBitmap(coursePictureBitmap);
+                coursePicture.setOnClickListener(new viewPicture());
 
                 String resultsFilePath = selectedEntry.getResultFilePathFilePath();
                 Bitmap resultsPictureBitmap = pictureLoader.getBitmap(resultsFilePath);
                 resultsPicture.setImageBitmap(resultsPictureBitmap);
+                resultsPicture.setOnClickListener(new viewPicture());
 
-                pic1Attacther = new PhotoViewAttacher(coursePicture);
+                /*pic1Attacther = new PhotoViewAttacher(coursePicture);
                 pic2Attacther = new PhotoViewAttacher(resultsPicture);
 
                 pic1Attacther.update();
-                pic2Attacther.update();
+                pic2Attacther.update();*/
             }
         }
     }
@@ -84,6 +86,31 @@ public class ViewEntry extends AppCompatActivity {
             Intent i = new Intent(getBaseContext(), ViewData.class);
             startActivity(i);
             finish();
+        }
+    }
+
+    public class viewPicture implements OnClickListener{
+        @Override
+        public void onClick(View v) {
+            Intent i = new Intent(getBaseContext(), ViewPicture.class);
+
+            String pictureFilePath;
+
+            //picture is of course
+            if(v.getId() == R.id.coursePicture)
+            {
+                pictureFilePath = selectedEntry.getCourseFilePath();
+            }
+            //picture is results
+            else
+            {
+                pictureFilePath = selectedEntry.getResultFilePathFilePath();
+            }
+
+            //Pass file path into ViewPicture activity
+            i.putExtra("pictureFilePath", pictureFilePath);
+
+            startActivityForResult(i, 0);
         }
     }
 }

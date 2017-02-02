@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
         imgBtnViewData = (ImageButton)findViewById(R.id.imgBtnViewData);
         imgBtnViewData.setOnClickListener(new viewDataHandler());
         imgBtnViewData.setImageBitmap(pic2);
-
-
     }
 
     //Handler to move to EnterData screen
